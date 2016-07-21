@@ -1,0 +1,12 @@
+# Take-off setting for plane
+
+FlightNo = ACA088
+      Captain's Name = "Peter Johnson \\"   # The backslash "\" is included
+First Officer =    Peter Johnson or "Jane Stuar\t"   # James Stuart
+Cabin Steward= " Meixin Wang \"Rosie\""  # The leading space and quotations are included
+Take-off Weight  = "34.78   
+# A warning will be generated in the above example
+Flaps = "10"  # it can still be parsed
+"N1" =90    # This line is skipped
+Passenger in seat "5A" = Mr. Alchem # This is not read because of the illegal quotation
+Passenger in seat 5B = Mr. Alchem # This is correct

@@ -1,0 +1,32 @@
+I. The configuration file should be able to do the following:
+Each lines specifies only 1 parameter and 1 value, in the format of 
+	parameter = value
+	parameter : value
+*Any characters enclosed by a quotation mark is regarded as a single string not including quotation mark and is tranferred as is, even including '#'
+*Quotation marks is escaped by ('\"')
+*Escape sign is escaped by ('\\')
+*Any character after # till the end of a line is discarded as comment
+*Only one assignement sign ('=' or ':') is allowed per line (excluding those inside a pair of quotation marks)
+*Any white space (space and tab) is discarded, but any space in a parameter or inside a pair of quotation marks is kept as is
+	
+II. For each line:
+1. Identify the quotation marks (except escape characters following only one '\' sign), mark the content inside quotation as "non-interpreted".
+
+2. Remove all the content after the first '#' sign or ';' sign
+3. Remove all the white spaces (space and tab). If line become empty, skip.
+4. Identify the first assignment sign. If not found, skip the line and mark an error
+5. Store the parameter and values in two separate vectors
+6. When needed, parse the values to int, float, etc...
+
+Examples below are valid
+
+Flow Rate = 123		#("Flow Rate", "123")
+FlowRate = 12 3 	#("FlowRate", "12 3")
+FlowRate = 12# 3	#("FlowRate", "12")
+FlowRate = "123"	#("FlowRate", "123")
+FlowRate = "123#"	#("FlowRate", "123#")
+FlowRate = "123\""	#("FlowRate", "123"")
+FlowRate = "123\\"	#("FlowRate", "123\")
+FlowRate = "123\n"	#("FlowRate", "123n" - a warning is generated because '\n' is not recognized as an escape character, 'n' is produced instead)
+
+III. To extract a parameter, operator [] (string) comes handy. To parse a string into numerical values, use functions such as i(), l(), f(), d() to convert to int, long, float and double
